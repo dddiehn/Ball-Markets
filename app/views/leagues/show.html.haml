@@ -1,0 +1,13 @@
+="#{@league.name} (#{@league.sport})"
+%h1="Teams"
+%table.table
+  %thead
+    %tr
+      %td="Name"
+      %td="Current Rating"
+      %td
+  %tbody
+    -@teams.each do |team|
+      %tr=team.name
+      %tr
+      %tr

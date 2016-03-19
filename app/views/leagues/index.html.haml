@@ -1,4 +1,14 @@
 %br
 %br
 %h1="Leagues"
-%p="The leagues that are in the database: #{@leagues.map(&:name)}"
+%button.btn.btn-info= link_to "New League", new_league_path()
+%table.table
+  %thead
+    %tr
+      %td="Name"
+      %td="Sport"
+  %tbody
+    -@leagues.each do |league|
+      %tr
+        %td= link_to league.name, league_path(league)
+        %td=league.sport
