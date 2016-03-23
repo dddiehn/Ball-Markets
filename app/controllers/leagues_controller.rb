@@ -1,5 +1,5 @@
 class LeaguesController < ApplicationController
-  respond_to :html
+  respond_to :html, :json, :js
   def index
     @leagues = League.all
 
@@ -18,7 +18,7 @@ class LeaguesController < ApplicationController
   end
 
   def create
-
+    @league = League.create(league_params)
     respond_with(@league)
   end
 
