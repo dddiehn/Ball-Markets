@@ -1,5 +1,5 @@
 =simple_form_for @league do |f|
   =f.input :name
-  =f.input :sport, collection: ["Football", "Basketball"]
+  =f.input :sport, collection: League.sports
 
   =f.submit "Save League"

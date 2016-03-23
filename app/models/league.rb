@@ -4,4 +4,8 @@ class League < ActiveRecord::Base
   def self.sports
     ["Football", "Basketball", "Hockey", "Baseball", "Soccer"].sort
   end
+
+  def update_league(path)
+    
+  end
 end

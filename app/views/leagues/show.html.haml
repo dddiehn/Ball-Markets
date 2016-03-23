@@ -4,6 +4,7 @@
     %h1="Teams"
   .col-md-6
     %button.btn.btn-info= link_to "New Team", new_league_team_path(@league)
+%p="Probably have a graph here showing data from the selected team"
 %table.table
   %thead
     %tr
@@ -12,6 +13,7 @@
       %td
   %tbody
     -@teams.each do |team|
-      %tr=team.name
       %tr
-      %tr
+        %td= link_to team.name, league_team_path(@league, team)
+        %td
+        %td
