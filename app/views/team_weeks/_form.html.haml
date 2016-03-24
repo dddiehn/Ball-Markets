@@ -1,0 +1,10 @@
+.row
+  .col-md-6
+    =simple_form_for [@league, @team, @team_week] do |f|
+      =f.input :team, as: :hidden, input_html: {value: @team.id}
+      =f.input :start_date
+      =f.input :season
+      =f.input :week
+      =f.input :rating
+
+      =f.submit "Save Week"

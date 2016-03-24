@@ -1,7 +1,6 @@
 class TeamsController < ApplicationController
   respond_to :html, :json, :js
 
-
   def new
     @team = Team.new()
     @league = League.find(params[:league_id])
@@ -15,7 +14,8 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:league_id])
+    @team = Team.find(params[:id])
+    @league = League.find(params[:league_id])
   end
 private
 

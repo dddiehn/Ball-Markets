@@ -1,3 +1,15 @@
 %h1=@team.name
 %p="Buy Stock Button"
 %p="There will be a graph here"
+%h2="Rating History"
+%button.btn.btn-info= link_to "New Week Rating", new_league_team_team_week_path(@league, @team)
+%table
+  %thead
+    %tr
+      %td="Week (Season)"
+      %td="Rating"
+  %tbody
+    -@team.team_weeks.each do |team_week|
+      %tr
+        %td="#{team_week.week} (#{team_week.season})"
+        %td=team_week.rating

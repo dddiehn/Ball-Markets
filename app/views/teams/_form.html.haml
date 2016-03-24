@@ -1,4 +1,7 @@
-=simple_form_for [@league, @team] do |f|
-  =f.input :name
+.row
+  .col-md-6
+    =simple_form_for [@league, @team] do |f|
+      =f.input :league, as: :hidden, input_html: {value: @league.id}
+      =f.input :name
 
-  =f.submit "Save Team"
+      =f.submit "Save Team"
