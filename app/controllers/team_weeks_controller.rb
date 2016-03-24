@@ -1,0 +1,2 @@
+class TeamWeeksController < ApplicationController
+end

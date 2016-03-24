@@ -1,5 +1,7 @@
-=simple_form_for @league do |f|
-  =f.input :name
-  =f.input :sport, collection: League.sports
+.row
+  .col-md-6
+    =simple_form_for @league do |f|
+      =f.input :name
+      =f.input :sport, collection: League.sports
 
-  =f.submit "Save League"
+      =f.submit "Save League"
