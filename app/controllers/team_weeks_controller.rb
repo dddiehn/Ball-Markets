@@ -10,7 +10,7 @@ class TeamWeeksController < ApplicationController
     @league = League.find(params[:league_id])
     @team   = Team.find(params[:team_id])
 
-    @team_week = TeamWeek.create(team_week_params)
+    @team_week = @team.team_weeks.create(team_week_params)
 
     respond_with(@league, @team)
   end

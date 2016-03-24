@@ -7,8 +7,8 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.create(league_params)
     @league = League.find(params[:league_id])
+    @team   = @league.teams.create(league_params)
 
     respond_with(@league, @team)
   end
