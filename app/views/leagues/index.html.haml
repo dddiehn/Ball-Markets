@@ -2,11 +2,11 @@
 %br
 %h1="Leagues"
 %button.btn.btn-info= link_to "New League", new_league_path()
-%table.table
+%table.table.table-striped
   %thead
     %tr
-      %td="Name"
-      %td="Sport"
+      %th="Name"
+      %th="Sport"
   %tbody
     -@leagues.each do |league|
       %tr

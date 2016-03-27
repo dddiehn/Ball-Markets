@@ -18,6 +18,11 @@ gem 'unicorn'
 gem 'unicorn-rails'
 gem 'responders', '~> 2.0'
 
+gem 'devise'
+gem 'cancancan'
+gem 'rolify'
+
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

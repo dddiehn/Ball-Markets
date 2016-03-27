@@ -1,10 +1,14 @@
 class TeamWeek < ActiveRecord::Base
+  resourcify
+
   belongs_to :team
 
   validates :team,   presence: true
   validates :date,   presence: true
   validates :season, presence: true
   validates :week,   presence: true
+
+  validates :date, uniqueness: {scope: :team, message: "Date has already been picked"}
 
   def import_csv
     # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
