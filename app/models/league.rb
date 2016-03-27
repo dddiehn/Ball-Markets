@@ -1,4 +1,5 @@
 class League < ActiveRecord::Base
+  resourcify
   has_many :teams
   has_many :team_weeks, through: :teams
 
