@@ -16,16 +16,27 @@ class TeamWeek < ActiveRecord::Base
     # TeamWeek(id: integer, team_id: integer, start_date: datetime, season: integer, week: integer, rating: integer, created_at: datetime, updated_at: datetime)
     require 'csv'
 
-    csv_text = File.read(csv_path)
-    csv = CSV.parse(csv_text, :headers => true)
-    csv.each do |row|
-      # TeamWeek.create!(row.to_hash)
-      puts "*"*630
-      attributes = row.to_hash
-      TeamWeek.create!({team: Team.find_by(league_id: league_id, name: attributes["name"]), start_date: start_date, season: season, week: week, rating: attributes["rating"]})
-      puts "*"*630
-    end
+    ActiveRecord::Base.transaction do
+      csv_text = File.read(csv_path)
+      csv = CSV.parse(csv_text, :headers => true)
+      csv.each do |row|
+        # TeamWeek.create!(row.to_hash)
 
+        attributes = row.to_hash
+        attributes[:team_id]    = Team.find_by!(league_id: league_id, name: attributes["name"]).id
+
+        attributes.delete("name")
+        attributes.delete(nil)
+
+        attributes[:start_date] = start_date
+        attributes[:season]     = season
+        attributes[:week]       = week
+
+        puts attributes
+        TeamWeek.create!(attributes)
+
+      end
+    end
 
     #
     # # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
