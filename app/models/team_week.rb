@@ -3,22 +3,44 @@ class TeamWeek < ActiveRecord::Base
 
   belongs_to :team
 
-  validates :team,   presence: true
-  validates :date,   presence: true
-  validates :season, presence: true
-  validates :week,   presence: true
+  validates :team,       presence: true
+  validates :start_date, presence: true
+  validates :season,     presence: true
+  validates :week,       presence: true
 
-  validates :date, uniqueness: {scope: :team, message: "Date has already been picked"}
+  validates :start_date, uniqueness: {scope: :team, message: "Date has already been picked"}
 
-  def import_csv
+  def self.team_week_import(league_id, csv_path, start_date, week, season)
     # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
-
+    # TeamWeek.team_week_import(1, 'public/week7/week7.csv')
+    # TeamWeek(id: integer, team_id: integer, start_date: datetime, season: integer, week: integer, rating: integer, created_at: datetime, updated_at: datetime)
     require 'csv'
 
-    csv_text = File.read('')
+    csv_text = File.read(csv_path)
     csv = CSV.parse(csv_text, :headers => true)
     csv.each do |row|
-      TeamWeek.create!(row.to_hash)
+      # TeamWeek.create!(row.to_hash)
+      puts "*"*630
+      attributes = row.to_hash
+      TeamWeek.create!({team: Team.find_by(league_id: league_id, name: attributes["name"]), start_date: start_date, season: season, week: week, rating: attributes["rating"]})
+      puts "*"*630
     end
+
+
+    #
+    # # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
+    # # Team.team_import(1, 'public/NFLnames.csv')
+    # require 'csv'
+    # csv_text = File.read(csv)
+    # csv = CSV.parse(csv_text, :headers => true)
+    # csv.each do |row|
+    #   attributes = row.to_hash
+    #   attributes[:league_id] = league_id
+    #   Team.create!(attributes)
+    # end
+
+
+
+
   end
 end

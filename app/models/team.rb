@@ -8,6 +8,7 @@ class Team < ActiveRecord::Base
 
   def self.team_import(league_id, csv)
     # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file
+    # Team.team_import(1, 'public/NFLnames.csv')
     require 'csv'
     csv_text = File.read(csv)
     csv = CSV.parse(csv_text, :headers => true)
