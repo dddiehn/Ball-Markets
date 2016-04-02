@@ -1,15 +1,16 @@
+#team-show
 %h1=@team.name
 %p="Buy Stock Button"
-%p="There will be a graph here"
+#team-stock-graph
 %h2="Rating History"
 %button.btn.btn-info= link_to "New Week Rating", new_league_team_team_week_path(@league, @team)
-%table.table-striped
+%table.table.table-striped.table-bordered.rating-table
   %thead
     %tr
       %th="Date - Week (Season)"
       %th="Rating"
   %tbody
     -@team.team_weeks.each do |team_week|
-      %tr
-        %td="#{team_week.start_date} - #{team_week.week} (#{team_week.season})"
+      %tr.data-row
+        %td="#{team_week.start_date.strftime('%Y/%m/%d')} - #{team_week.week} (#{team_week.season})"
         %td=team_week.rating
