@@ -8,7 +8,8 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
-    @teams = @league.teams
+    @teams = {}
+    @league.teams.map{|t| @teams[t] = t.current_rating}
 
     render :show
   end

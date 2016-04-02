@@ -5,6 +5,11 @@ class Team < ActiveRecord::Base
 
   validates :league, presence: true
   validates :name,   presence: true
+  validates :name,   uniqueness: {scope: :league, message: "This team already exists in this league"}
+
+  def current_rating
+    self.team_weeks.order(:start_date).first
+  end
 
   def self.team_import(league_id, csv)
     # http://stackoverflow.com/questions/4410794/ruby-on-rails-import-data-from-a-csv-file

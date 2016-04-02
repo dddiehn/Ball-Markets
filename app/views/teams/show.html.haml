@@ -1,5 +1,7 @@
 #team-show
-%h1=@team.name
+%h1
+  =@team.name
+  =link_to "(#{@league.name})", league_path(@league)
 %p="Buy Stock Button"
 #team-stock-graph
 %h2="Rating History"
@@ -13,4 +15,4 @@
     -@team.team_weeks.each do |team_week|
       %tr.data-row
         %td="#{team_week.start_date.strftime('%Y/%m/%d')} - #{team_week.week} (#{team_week.season})"
-        %td=team_week.rating
+        %td=team_week.try(:rating)

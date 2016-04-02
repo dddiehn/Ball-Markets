@@ -10,10 +10,8 @@
     %tr
       %td="Name"
       %td="Current Rating"
-      %td
   %tbody
-    -@teams.each do |team|
+    -@teams.each do |team, team_week|
       %tr
         %td= link_to team.name, league_team_path(@league, team)
-        %td
-        %td
+        %td= team_week.try(:rating)
