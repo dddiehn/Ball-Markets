@@ -11,11 +11,19 @@ $ ->
       date   = new Date(date_string)
       rating = $($(row).find('td')[1]).text()
 
+      console.log("*****")
+      console.log(date_string)
+      console.log(date)
+      console.log(rating)
+
+
       data.push([date, rating])
+
+      console.log("*****")
 
     console.log(data)
 
+
     new Dygraph(document.getElementById('team-stock-graph'),
       data,
-      rollPeriod: 7
-      errorBars: true)
+    )
