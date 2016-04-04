@@ -1,2 +1,7 @@
-.topbar-link= link_to 'Leagues', leagues_path
--# = link_to 'User', user_path(User.current_user)
+-# http://stackoverflow.com/questions/8878033/how-to-make-twitter-bootstrap-menu-dropdown-on-hover-rather-than-click
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown"}= link_to 'Leagues', leagues_path
+  %ul.dropdown-menu
+    -# this should be in a controller but I haven't figured out the application controller yet
+    -League.all.order(:name).each do |l|
+      %li=link_to "#{l.name} (#{l.sport})", league_path(l)
