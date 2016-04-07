@@ -2,6 +2,20 @@
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown"}= link_to 'Leagues', leagues_path
   %ul.dropdown-menu
-    -# this should be in a controller but I haven't figured out the application controller yet
+    -# this should be in a controller (application contoller? (should be cached too, but I haven't done any cacheing yet)) but I haven't figured out the application controller yet
     -League.all.order(:name).each do |l|
       %li=link_to "#{l.name} (#{l.sport})", league_path(l)
+
+.pull-right
+  - cu = current_user.present?
+  .dropdown
+    .btn.btn-default.dropdown-toggle{"type" => "button", "id" => "user-navigation-dropdown", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true"}
+      = cu ? current_user.email : "Log In"
+      %span.caret
+    %ul.dropdown-menu{"aria-labelledby" => "user-navigation-dropdown"}
+      -if cu
+        %li
+          %a="Sign Out"
+      -else
+        %li
+          %a="Sign In"

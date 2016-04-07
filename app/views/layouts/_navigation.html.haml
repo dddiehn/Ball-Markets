@@ -12,18 +12,3 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         = render 'layouts/navigation_links'
-        
-    - cu = current_user.present?
-
-    .pull-right
-      .dropdown
-        .btn.btn-default.dropdown-toggle{"type" => "button", "id" => "user-navigation-dropdown", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "true"}
-          = cu ? current_user.email : "Users"
-          %span.caret
-        %ul.dropdown-menu{"aria-labelledby" => "user-navigation-dropdown"}
-          -if cu
-            %li
-              %a="Sign Out"
-          -else
-            %li
-              %a="Sign In"
