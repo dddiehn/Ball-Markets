@@ -1,4 +1,6 @@
 -# http://stackoverflow.com/questions/8878033/how-to-make-twitter-bootstrap-menu-dropdown-on-hover-rather-than-click
+- cu = current_user.present?
+-# if cu
 %li.dropdown
   %a.dropdown-toggle{ "href" => leagues_path}='Leagues'
   %ul.dropdown-menu
@@ -8,7 +10,7 @@
         =link_to "#{l.name} (#{l.sport})", league_path(l)
 
 
-- cu = current_user.present?
+
 %li.dropdown
   %a.dropdown-toggle{"data-toggle" => "dropdown"}= cu ? current_user.email : "Sign In"
   %ul.dropdown-menu
