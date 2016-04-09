@@ -21,6 +21,8 @@ development:
   username: ball-markets
   password:
   template: template0
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -49,6 +51,8 @@ test:
   username: ball-markets
   password:
   template: template0
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
 
 production:
   adapter:  postgresql
@@ -59,3 +63,5 @@ production:
   username: ball-markets
   password:
   template: template0
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
