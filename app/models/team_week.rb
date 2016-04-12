@@ -17,24 +17,28 @@ class TeamWeek < ActiveRecord::Base
     require 'csv'
 
     ActiveRecord::Base.transaction do
-      csv_text = File.read(csv_path)
-      csv = CSV.parse(csv_text, :headers => true)
-      csv.each do |row|
-        # TeamWeek.create!(row.to_hash)
+      begin
+        csv_text = File.read(csv_path)
+        csv = CSV.parse(csv_text, :headers => true)
+        csv.each do |row|
+          # TeamWeek.create!(row.to_hash)
 
-        attributes = row.to_hash
-        attributes[:team_id]    = Team.find_by!(league_id: league_id, name: attributes["name"]).id
+          attributes = row.to_hash
+          attributes[:team_id]    = Team.find_by!(league_id: league_id, name: attributes["name"]).id
 
-        attributes.delete("name")
-        attributes.delete(nil)
+          attributes.delete("name")
+          attributes.delete(nil)
 
-        attributes[:start_date] = start_date
-        attributes[:season]     = season
-        attributes[:week]       = week
+          attributes[:start_date] = start_date
+          attributes[:season]     = season
+          attributes[:week]       = week
 
-        puts attributes
-        TeamWeek.create!(attributes)
+          puts attributes
+          TeamWeek.create!(attributes)
 
+        end
+      rescue
+        raise ActiveRecord::Rollback
       end
     end
 

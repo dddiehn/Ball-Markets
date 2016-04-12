@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
 
   resources :leagues do
+    member do
+      get 'graph_data'
+    end
+
     resources :teams do
       resources :team_weeks do
 

@@ -35,6 +35,26 @@ class LeaguesController < ApplicationController
 
   end
 
+  def graph_data
+    league = League.find(params[:id])
+    data = {}
+
+    TeamWeek.joins(:team)
+            .where(team: {league_id: params[:id]})
+            .where('extract(day   from start_date) = ?')
+            .where('extract(month from start_date) = ?')
+            .where('extract(year  from start_date) = ?')
+
+    # http://stackoverflow.com/questions/9624601/activerecord-find-by-year-day-or-month-on-a-date-field
+    # Model.where('extract(year  from date_column) = ?', desired_year)
+    # Model.where('extract(month from date_column) = ?', desired_month)
+    # Model.where('extract(day   from date_column) = ?', desired_day_of_month)
+
+    respond_to do |format|
+      format.json{ render json: data.to_json }
+    end
+  end
+
 private
 
   def league_params

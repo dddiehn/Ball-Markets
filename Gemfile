@@ -15,8 +15,6 @@ gem 'high_voltage'
 gem 'pg'
 gem 'simple_form'
 
-# gem 'unicorn'
-# gem 'unicorn-rails'
 gem 'puma'
 
 gem 'responders', '~> 2.0'

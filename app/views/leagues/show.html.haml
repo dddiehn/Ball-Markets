@@ -1,17 +1,20 @@
-="#{@league.name} (#{@league.sport})"
-.row
-  .col-md-6
-    %h1="Teams"
-  .col-md-6
-    %button.btn.btn-info= link_to "New Team", new_league_team_path(@league)
-%p="Probably have a graph here showing data from the selected team, or maybe multiple teams"
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %td="Name"
-      %td="Current Rating"
-  %tbody
-    -@teams.each do |team, team_week|
+#league-show
+  #league-id.hidden=@league.id
+  ="#{@league.name} (#{@league.sport})"
+  .row
+    .col-md-6
+      %h1="Teams"
+    .col-md-6
+      %button.btn.btn-info= link_to "New Team", new_league_team_path(@league)
+  #league-graph
+    %p="Loading..."
+  %table.table.table-striped.table-bordered
+    %thead
       %tr
-        %td= link_to team.name, league_team_path(@league, team)
-        %td= team_week.try(:rating)
+        %td="Name"
+        %td="Current Rating"
+    %tbody
+      -@teams.each do |team, team_week|
+        %tr
+          %td= link_to team.name, league_team_path(@league, team)
+          %td= team_week.try(:rating)
